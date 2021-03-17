@@ -1,0 +1,7 @@
+mymodule.get_json_response:
+ path: 'page-json/key/{nodeid}'
+ defaults:
+   _controller: '\Drupal\mymodule\Controller\CustomPageJsonResponce::getJsonResponce'
+ # methods: [GET]
+ requirements:
+   _access: 'TRUE'

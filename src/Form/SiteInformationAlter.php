@@ -5,6 +5,7 @@ namespace Drupal\mymodule\Form;
 // Classes referenced in this class:
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Form\ConfigFormBase;
+use Drupal\Core\Messenger\MessengerInterface;
 
 // This is the form being extended:
 use Drupal\system\Form\SiteInformationForm;
@@ -17,7 +18,6 @@ class SiteInformationAlter extends SiteInformationForm {
   /**
    * {@inheritdoc}
    */
-
   public function buildForm(array $form, FormStateInterface $form_state) {
     // Retrieve the system.site configuration
     $site_config = $this->config('system.site');
@@ -32,11 +32,6 @@ class SiteInformationAlter extends SiteInformationForm {
 			'#default_value' => $site_config->get('siteapikey') ?: 'No API Key yet',
 			'#description' => t("Custom field to set the API Key"),
 		];
-
-    // Update Submit Button Name
-    if($site_config->get('siteapikey') != 'No API Key yet' && $site_config->get('siteapikey') != ''){
-      $form['actions']['submit']['#value'] = t('Update Configuration');
-    }
 
     return $form;
   }
@@ -54,11 +49,11 @@ class SiteInformationAlter extends SiteInformationForm {
 
     // Save the configuration
     $config ->save();
-    $this->messenger()->addMessage('Site API Key is saved');
+	
+	drupal_set_message($this->t('Site API Key is saved is @sitekey.'),['@sitekey' => $siteapikey_value]);
 
     // Pass the remaining values off to the parent form that is being extended,
     // so that that the parent form can process the values.
     parent::submitForm($form, $form_state);
   }
-
 }
