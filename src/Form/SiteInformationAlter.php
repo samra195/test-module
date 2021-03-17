@@ -49,7 +49,7 @@ class SiteInformationAlter extends SiteInformationForm {
 
     // Save the configuration
     $config ->save();
-	
+
 	drupal_set_message($this->t('Site API Key is saved is @sitekey.'),['@sitekey' => $siteapikey_value]);
 
     // Pass the remaining values off to the parent form that is being extended,

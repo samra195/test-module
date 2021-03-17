@@ -13,10 +13,10 @@ use Drupal\Core\Entity\Query\QueryFactory;
 class CustomPageJsonResponce extends ControllerBase {
 
   /**
- * Entity query factory.
- *
- * @var \Drupal\Core\Entity\Query\QueryFactory
- */
+  * Entity query factory.
+  *
+  * @var \Drupal\Core\Entity\Query\QueryFactory
+  */
   protected $entityQuery;
 
  /**
@@ -43,6 +43,7 @@ class CustomPageJsonResponce extends ControllerBase {
 
     $node_query = [$nodeid];
 
+    //Set configuration variable
     $config = \Drupal::config('system.site');
 
     if ($node_query) {
